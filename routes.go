@@ -103,7 +103,7 @@ func updatePatient(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "text/plain")
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("oops I did it again, I played withh you data, I lost in the dataaaaaa"))
+		w.Write([]byte("There was an issue with your request! Please try again later"))
 	} else {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusAccepted)
