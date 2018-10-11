@@ -56,7 +56,7 @@ func getPatientByID(w http.ResponseWriter, r *http.Request) {
 func createPatient(w http.ResponseWriter, r *http.Request) {
 	patient := patient{}
 	json.NewDecoder(r.Body).Decode(&patient)
-	err := patient.savePatientToJSON()
+	err := patient.createNewPatientInJSON()
 	if err != nil {
 		fmt.Printf("Error writing patient to json file: %+v", err)
 		w.Header().Set("Content-Type", "text/plain")
@@ -86,4 +86,24 @@ func searchPatients(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(patientIDs)
 	}
 
+}
+
+func updatePatient(w http.ResponseWriter, r *http.Request) {
+	patientID, _ := strconv.Atoi(mux.Vars(r)["patientID"])
+
+	patient, _ := getSinglePatient(patientID)
+
+	json.NewDecoder(r.Body).Decode(&patient)
+
+	err := updatePatientInJSON(patient, patientID)
+
+	if err != nil {
+		w.Header().Set("Content-Type", "text/plain")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("oops I did it again, I played withh you data, I lost in the dataaaaaa"))
+	} else {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusAccepted)
+		w.Write([]byte("{}"))
+	}
 }

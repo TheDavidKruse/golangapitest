@@ -13,6 +13,7 @@ func main() {
 	r.HandleFunc("/", getAllPatients).Methods("GET")
 	r.HandleFunc("/search", searchPatients).Methods("GET")
 	r.HandleFunc("/patient/{patientID}", getPatientByID).Methods("GET")
+	r.HandleFunc("/patient/{patientID}", updatePatient).Methods("PATCH")
 	r.HandleFunc("/patient", createPatient).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8000", r))

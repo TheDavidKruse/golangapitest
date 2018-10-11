@@ -1,18 +1,1 @@
-[{
-  "id": 1,
-  "first_name": "Gardener",
-  "last_name": "Matejic",
-  "gender": "Male",
-  "phone_number": "674-282-5174",
-  "email": "gmatejic0@tuttocitta.it",
-  "address": "9 Manley Terrace",
-  "visit_date": "7/23/2017",
-  "diagnosis": "T510X4A",
-  "drug_code": "30142-179",
-  "additional_information": [{
-    "notes": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
-    "new_patient": false,
-    "race": "Pima",
-    "ssn": "662-59-1672"
-  }]
-}]
+[{"id":1,"first_name":"David","last_name":"Truse","gender":"Male","phone_number":"674-282-5174","email":"gmatejic0@tuttocitta.it","address":"9 Manley Terrace","visit_date":"7/23/2017","diagnosis":"T510X4A","drug_code":"30142-179","additional_information":[{"notes":"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.","new_patient":false,"race":"Pima","ssn":"662-59-1672"},{"notes":"the man has a YUUUUHG donger","new_patient":true,"race":"Diiiiiiiiiick","ssn":"420-69-1337"}]}]

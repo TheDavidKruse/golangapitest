@@ -55,6 +55,22 @@ func readPatientsFromJSON() ([]patient, error) {
 	return patients, nil
 }
 
+func savePatientsToJSON(patientArr []patient) error {
+	patientJSON, err := json.Marshal(patientArr)
+
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile("MOCK_DATA.json", patientJSON, 0644)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func getSinglePatient(patientID int) (patient, error) {
 	patients, err := readPatientsFromJSON()
 	if err != nil {
@@ -68,6 +84,18 @@ func getSinglePatient(patientID int) (patient, error) {
 	}
 
 	return patient{}, errors.New("Patient does not exist")
+}
+
+func (p *patient) createNewPatientInJSON() error {
+	patients, err := readPatientsFromJSON()
+	if err != nil {
+		return err
+	}
+	p.ID = len(patients) + 1
+
+	// RIGHT HERE YOU BIG DUMB IDIOT
+
+	return nil
 }
 
 func searchForPatientsMatching(key, value string) (patientIDs, error) {
@@ -102,25 +130,26 @@ func getField(p *patient, fieldName string) string {
 	parsedTagName := reg.ReplaceAllString(fieldName, "")
 
 	for i := 0; i < patientStructTags.Type().NumField(); i++ {
-		tags := patientStructTags.Type().Field(i).Name
-		fmt.Println(tags)
-		if strings.ToLower(patientStructTags.Type().Field(i).Name) == parsedTagName {
-			parsedTag = patientStructTags.Type().Field(i).Name
+		tag := patientStructTags.Type().Field(i).Name
+		if strings.ToLower(tag) == parsedTagName {
+			parsedTag = tag
 		}
 	}
+
 	filledPatientStruct := reflect.ValueOf(p)
 	valueOfStructTag := strings.ToLower(reflect.Indirect(filledPatientStruct).FieldByName(parsedTag).String())
 	return valueOfStructTag
 }
 
-func (p *patient) savePatientToJSON() error {
-	patients, err := readPatientsFromJSON()
-	if err != nil {
-		return err
+func updatePatientInJSON(updatePatient patient, index int) error {
+	patients, _ := readPatientsFromJSON()
+
+	for i := range patients {
+		if patients[i].ID == index {
+			patients[i] = updatePatient
+		}
 	}
-	p.ID = len(patients) + 1
-	patients = append(patients, *p)
-	patientJSON, _ := json.Marshal(patients)
-	ioutil.WriteFile("MOCK_DATA.json", patientJSON, 0644)
+
+	savePatientsToJSON(patients)
 	return nil
 }
