@@ -89,6 +89,9 @@ func searchPatients(w http.ResponseWriter, r *http.Request) {
 }
 
 func updatePatient(w http.ResponseWriter, r *http.Request) {
+
+	// The easiest way to make this work was to stream the new json data into the old struct and save it so hopefully that isnt a bad thing
+
 	patientID, _ := strconv.Atoi(mux.Vars(r)["patientID"])
 
 	patient, _ := getSinglePatient(patientID)
