@@ -10,7 +10,7 @@ import (
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/health", amIRunning).Methods("GET")
-	r.HandleFunc("/", getAllPatients).Methods("GET")
+	r.HandleFunc("/patient", getAllPatients).Methods("GET")
 	r.HandleFunc("/search", searchPatients).Methods("GET")
 	r.HandleFunc("/patient/{patientID}", getPatientByID).Methods("GET")
 	r.HandleFunc("/patient/{patientID}", updatePatient).Methods("PATCH")
